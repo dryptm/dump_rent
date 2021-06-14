@@ -17,8 +17,8 @@ const puppeteer = require('puppeteer')
 // })();
 
 
-let bhk_count = [0, 1, 1, 1, 0, 0];
-let place = "tamil nadu";
+let bhk_count = [0, 1, 1, 0, 0, 0];
+let place = "lucknow";
 
 var d = new Date();
 var n1 = d.getSeconds();
@@ -54,7 +54,7 @@ for (let x = 0; x < bhk_count.length; x++) {
                 await page.waitForNavigation({
                     waitUntil: 'networkidle2',
                 });
-               
+
                 var page_prop = await page.evaluate(() => {
 
                     var numberofblocks = document.querySelectorAll(".m-srp-card").length;
@@ -147,9 +147,120 @@ for (let x = 0; x < bhk_count.length; x++) {
                 var d = new Date();
                 var n2 = d.getSeconds();
                 if ((n2 - n1) < 0) {
-                    console.log((60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks");
+                    console.log((60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
                 } else {
-                    console.log(((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks");
+                    console.log(((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
+                }
+
+                await browser.close();
+            })();
+            (async () => {
+                const browser = await puppeteer.launch({
+                    headless: false,
+                    args: ['--start-maximized']
+                });
+                const page = await browser.newPage();
+                page.setViewport({
+                    width: 0,
+                    height: 0
+                });
+                const search_string1 = "rent 99acres " + (x + 1) + " bhk " + place + " ";
+
+                console.log("-x-x-x-x- start -x-x-x-x-x-x-")
+                await page.goto("https://www.google.com/search?q=" + search_string1);
+                console.log("x-x-x-x-x- next -x-x-x-x-x")
+                await page.evaluate(() => {
+                    document.querySelector('.DKV0Md').click()
+
+                })
+                // full page load wait
+                await page.waitForNavigation({
+                    waitUntil: 'networkidle2',
+                });
+
+                var page_prop = await page.evaluate(() => {
+
+                    var numberofblocks = document.querySelectorAll(".srp").length;
+                    var property_details = [];
+
+                    for (let i = 0; i < numberofblocks; i++) {
+
+                        //redirect_url...................................
+                        let url_code = document.querySelectorAll(".srp")[i].outerHTML.split(" ")[4].split('"')[1];
+                        let redirect_url = "https://www.99acres.com/" + url_code;
+
+                        // bhk..................................
+                        let bhk = document.querySelectorAll(".srpTuple__spacer16 ")[(i * 3) + 2].innerText;
+                        bhk = Number(bhk.split(" ")[0]);
+
+                        //location........................   
+                        var location_prop = document.querySelectorAll(".srpTuple__tupleTable")[i].firstElementChild.firstElementChild.innerText;
+
+                        //price..............................
+                        let c = document.querySelectorAll(".srpTuple__spacer16 ")[i * 3].innerText
+
+                        var price = [];
+
+                        if (c.length > 10) {
+                            var res = c.split(" ");
+                            var str1 = res[1].split("");
+                            var arr = [];
+                            for (var j = 0; j < str1.length; j++) {
+                                if (str1[j] !== "\t" && str1[j] !== " " && str1[j] !== "\n") {
+                                    arr.push(str1[j]);
+                                }
+                            }
+                            var lack_check = res[2];
+
+                            if (lack_check === "Lac") {
+                                price = (Number(res[1]) * 100000);
+                            } else {
+                                for (var j = 0; j < arr.length; j++) {
+                                    if (arr[j] !== ",") {
+                                        price.push(arr[j]);
+                                    }
+                                }
+                                price = Number(price.join(''));
+                            }
+                        } else {
+                            price = "Call for price";
+                        }
+
+                        //size................................
+                        let size = document.querySelectorAll(".srpTuple__spacer16 ")[(i * 3) + 1].innerText;
+                        size = size.split(" ")[0] + size.split(" ")[1];
+
+
+
+                        var object_property = {
+
+                            "redirect_url": redirect_url,
+                            "bhk": bhk,
+                            "location": location_prop,
+                            "price": price,
+                            "size": size
+                        };
+
+                        //picture.....................................
+                        if (document.querySelectorAll(".srpTuple__tupleDetails ")[i] && document.querySelectorAll(".srpTuple__tupleDetails ")[i].firstElementChild.firstElementChild.firstElementChild.lastElementChild.attributes[0].value) {
+                            object_property.picture = document.querySelectorAll(".srpTuple__tupleDetails ")[i].firstElementChild.firstElementChild.firstElementChild.lastElementChild.attributes[0].value;
+                        }
+
+                        property_details.push(object_property);
+                    }
+
+                    return property_details;
+
+                })
+                // console.log(page_prop)
+
+
+                var d = new Date();
+                var n2 = d.getSeconds();
+                if ((n2 - n1) < 0) {
+                    console.log((60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from 99acers in " + place);
+                } else {
+                    console.log(((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from 99acers in " + place);
                 }
 
                 await browser.close();
@@ -268,9 +379,110 @@ for (let x = 0; x < bhk_count.length; x++) {
                 var d = new Date();
                 var n2 = d.getSeconds();
                 if ((n2 - n1) < 0) {
-                    console.log((60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks");
+                    console.log((60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
                 } else {
-                    console.log(((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks");
+                    console.log(((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
+                }
+
+
+                await browser.close();
+            })();
+            (async () => {
+                const browser = await puppeteer.launch({
+                    headless: false,
+                    args: ['--start-maximized']
+                });
+                const page = await browser.newPage();
+                page.setViewport({
+                    width: 0,
+                    height: 0
+                });
+                console.log("-x-x-x-x- start -x-x-x-x-x-x-")
+                await page.goto("https://www.99acres.com/" + (x + 1) + "-bhk-residential-apartments-for-rent-in-" + (place) + "-ffid");
+
+                var page_prop = await page.evaluate(() => {
+
+                    var numberofblocks = document.querySelectorAll(".srp").length;
+                    var property_details = [];
+
+                    for (let i = 0; i < numberofblocks; i++) {
+
+                        //redirect_url...................................
+                        let url_code = document.querySelectorAll(".srp")[i].outerHTML.split(" ")[4].split('"')[1];
+                        let redirect_url = "https://www.99acres.com/" + url_code;
+
+                        // bhk..................................
+                        let bhk = document.querySelectorAll(".srpTuple__spacer16 ")[(i * 3) + 2].innerText;
+                        bhk = Number(bhk.split(" ")[0]);
+
+                        //location........................   
+                        var location_prop = document.querySelectorAll(".srpTuple__tupleTable")[i].firstElementChild.firstElementChild.innerText;
+
+                        //price..............................
+                        let c = document.querySelectorAll(".srpTuple__spacer16 ")[i * 3].innerText
+
+                        var price = [];
+
+                        if (c.length > 10) {
+                            var res = c.split(" ");
+                            var str1 = res[1].split("");
+                            var arr = [];
+                            for (var j = 0; j < str1.length; j++) {
+                                if (str1[j] !== "\t" && str1[j] !== " " && str1[j] !== "\n") {
+                                    arr.push(str1[j]);
+                                }
+                            }
+                            var lack_check = res[2];
+
+                            if (lack_check === "Lac") {
+                                price = (Number(res[1]) * 100000);
+                            } else {
+                                for (var j = 0; j < arr.length; j++) {
+                                    if (arr[j] !== ",") {
+                                        price.push(arr[j]);
+                                    }
+                                }
+                                price = Number(price.join(''));
+                            }
+                        } else {
+                            price = "Call for price";
+                        }
+
+                        //size................................
+                        let size = document.querySelectorAll(".srpTuple__spacer16 ")[(i * 3) + 1].innerText;
+                        size = size.split(" ")[0] + size.split(" ")[1];
+
+
+
+                        var object_property = {
+
+                            "redirect_url": redirect_url,
+                            "bhk": bhk,
+                            "location": location_prop,
+                            "price": price,
+                            "size": size
+                        };
+
+                        //picture.....................................
+                        if (document.querySelectorAll(".srpTuple__tupleDetails ")[i] && document.querySelectorAll(".srpTuple__tupleDetails ")[i].firstElementChild.firstElementChild.firstElementChild.lastElementChild.attributes[0].value) {
+                            object_property.picture = document.querySelectorAll(".srpTuple__tupleDetails ")[i].firstElementChild.firstElementChild.firstElementChild.lastElementChild.attributes[0].value;
+                        }
+
+                        property_details.push(object_property);
+                    }
+
+                    return property_details;
+
+                })
+                // console.log(page_prop)
+
+
+                var d = new Date();
+                var n2 = d.getSeconds();
+                if ((n2 - n1) < 0) {
+                    console.log((60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from 99acers in " + place);
+                } else {
+                    console.log(((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from 99acers in " + place);
                 }
 
 
