@@ -18,11 +18,8 @@ const puppeteer = require('puppeteer')
 
 
 let bhk_count = [0, 1, 1, 1, 0, 0];
-let place = "lucknow";
-let url_count = 0;
-let url_count1 = 0;
-let place1 = "";
-let place2 = "";
+let place = "tamil nadu";
+
 var d = new Date();
 var n1 = d.getSeconds();
 
@@ -57,17 +54,7 @@ for (let x = 0; x < bhk_count.length; x++) {
                 await page.waitForNavigation({
                     waitUntil: 'networkidle2',
                 });
-                place1 = await page.evaluate(() => {
-                    let x = document.URL.split("-")
-                    let l = x.length
-                    let pl = [];
-                    for (let i = 6; i < l - 1; i++) {
-                        pl.push(x[i])
-                    }
-                    place1 = pl.join("-")
-                    return place1;
-                })
-
+               
                 var page_prop = await page.evaluate(() => {
 
                     var numberofblocks = document.querySelectorAll(".m-srp-card").length;
