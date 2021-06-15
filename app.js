@@ -16,9 +16,9 @@ const puppeteer = require('puppeteer')
 //     await browser.close();
 // })();
 
-
-let bhk_count = [0, 1, 1, 0, 0, 0];
-let place = "lucknow";
+let bhk_count = [1, 1, 1, 1, 1, 1]
+// let bhk_count = [0, 0, 1, 0, 0, 0];
+let place = "tamil nadu";
 
 var d = new Date();
 var n1 = d.getSeconds();
@@ -51,9 +51,7 @@ for (let x = 0; x < bhk_count.length; x++) {
 
                 })
                 // full page load wait
-                await page.waitForNavigation({
-                    waitUntil: 'networkidle2',
-                });
+                await page.waitForNavigation();
 
                 var page_prop = await page.evaluate(() => {
 
@@ -174,9 +172,7 @@ for (let x = 0; x < bhk_count.length; x++) {
 
                 })
                 // full page load wait
-                await page.waitForNavigation({
-                    waitUntil: 'networkidle2',
-                });
+                await page.waitForNavigation();
 
                 var page_prop = await page.evaluate(() => {
 
