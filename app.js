@@ -145,9 +145,9 @@ for (let x = 0; x < bhk_count.length; x++) {
                 var d = new Date();
                 var n2 = d.getSeconds();
                 if ((n2 - n1) < 0) {
-                    console.log((60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
+                    console.log(page_prop.length + " properties in " + (60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
                 } else {
-                    console.log(((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
+                    console.log(page_prop.length + " properties in " + ((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
                 }
 
                 await browser.close();
@@ -254,16 +254,17 @@ for (let x = 0; x < bhk_count.length; x++) {
                 var d = new Date();
                 var n2 = d.getSeconds();
                 if ((n2 - n1) < 0) {
-                    console.log((60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from 99acers in " + place);
+                    console.log(page_prop.length + " properties in " + (60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from 99acers in " + place);
                 } else {
-                    console.log(((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from 99acers in " + place);
+                    console.log(page_prop.length + " properties in " + ((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from 99acers in " + place);
                 }
 
                 await browser.close();
             })();
+            //housing.com----------------------------------------------------------------
             (async () => {
                 const browser = await puppeteer.launch({
-                    headless: false,
+                    headless: true,
                     args: ['--start-maximized']
                 });
                 const page = await browser.newPage();
@@ -299,14 +300,16 @@ for (let x = 0; x < bhk_count.length; x++) {
 
                                 //location........................   
 
-                                var location_prop = document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split("\n")[2] + " " + document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split("\n")[3];
+                                var location_prop = document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[1].childNodes[0].childNodes[3].childNodes[0].innerText;
 
 
                                 //price..............................
-                                let price = Number(document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split("\n")[1].split(",")[0] + document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split("\n")[1].split(",")[1])
+                                let price = Number(document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[1].childNodes[0].childNodes[1].innerText.split(",")[0] + document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[1].childNodes[0].childNodes[1].innerText.split(",")[1])
 
                                 //size................................
-                                let size = document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split("\n")[4].split("urnished")[1]
+                                let size = document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[1].childNodes[0].childNodes[4].childNodes[1].innerText
+
+
 
 
 
@@ -339,9 +342,9 @@ for (let x = 0; x < bhk_count.length; x++) {
                 var d = new Date();
                 var n2 = d.getSeconds();
                 if ((n2 - n1) < 0) {
-                    console.log((60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from housing.com in " + place);
+                    console.log(page_prop.length + " properties in " + (60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from housing.com in " + place);
                 } else {
-                    console.log(((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from housing.com in " + place);
+                    console.log(page_prop.length + " properties in " + ((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from housing.com in " + place);
                 }
 
 
@@ -464,9 +467,9 @@ for (let x = 0; x < bhk_count.length; x++) {
                 var d = new Date();
                 var n2 = d.getSeconds();
                 if ((n2 - n1) < 0) {
-                    console.log((60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
+                    console.log(page_prop.length + " properties in " + (60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
                 } else {
-                    console.log(((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
+                    console.log(page_prop.length + " properties in " + ((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
                 }
 
 
@@ -565,14 +568,15 @@ for (let x = 0; x < bhk_count.length; x++) {
                 var d = new Date();
                 var n2 = d.getSeconds();
                 if ((n2 - n1) < 0) {
-                    console.log((60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from 99acers in " + place);
+                    console.log(page_prop.length + " properties in " + (60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from 99acers in " + place);
                 } else {
-                    console.log(((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from 99acers in " + place);
+                    console.log(page_prop.length + " properties in " + ((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from 99acers in " + place);
                 }
 
 
                 await browser.close();
             })();
+            //housing.com----------------------------------------------------------------
             (async () => {
                 const browser = await puppeteer.launch({
                     headless: false,
@@ -599,56 +603,63 @@ for (let x = 0; x < bhk_count.length; x++) {
 
                     var numberofblocks = document.querySelectorAll(".results-wrapper")[0].childNodes.length;
                     var property_details = [];
-
                     for (let i = 0; i < numberofblocks; i++) {
+                        if (document.querySelectorAll(".results-wrapper")[0].childNodes[i] && document.querySelectorAll(".results-wrapper")[0].childNodes[i].attributes[0]) {
+                            if (document.querySelectorAll(".results-wrapper")[0].childNodes[i].attributes[0].nodeName == "data-listingid") {
+                                //redirect_url...................................
 
-                        //redirect_url...................................
+                                let redirect_url = "https://housing.com/rent/search-" + document.URL.split("-")[document.URL.split("-").length - 1] + "?listingId=" + document.querySelectorAll(".results-wrapper")[0].childNodes[i].attributes[0].value
 
-                        let redirect_url = "https://housing.com/rent/search-" + document.URL.split("-")[document.URL.split("-").length - 1] + "?listingId=" + document.querySelectorAll(".results-wrapper")[0].childNodes[i].attributes[0].value
+                                // bhk..................................
+                                let bhk = Number(document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split(" ")[0].split("\n")[1])
 
-                        // bhk..................................
-                        let bhk = Number(document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split(" ")[0].split("\n")[1])
+                                //location........................   
 
-                        //location........................   
-                        var location_prop = document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split("\n")[2] + " " + document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split("\n")[3];
-
-                        //price..............................
-                        let price = Number(document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split("\n")[1].split(",")[0] + document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split("\n")[1].split(",")[1])
-
-                        //size................................
-                        let size = document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split("\n")[4].split("urnished")[1]
+                                var location_prop = document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[1].childNodes[0].childNodes[3].childNodes[0].innerText;
 
 
+                                //price..............................
+                                let price = Number(document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[1].childNodes[0].childNodes[1].innerText.split(",")[0] + document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[1].childNodes[0].childNodes[1].innerText.split(",")[1])
 
-                        var object_property = {
+                                //size................................
+                                let size = document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[1].childNodes[0].childNodes[4].childNodes[1].innerText
 
-                            "redirect_url": redirect_url,
-                            "bhk": bhk,
-                            "location": location_prop,
-                            "price": price,
-                            "size": size
-                        };
 
-                        //picture.....................................
-                        if (document.querySelectorAll(".results-wrapper")[0].childNodes[i] && document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[0].childNodes[0].currentSrc) {
-                            object_property.picture = document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[0].childNodes[0].currentSrc;
+
+
+
+                                var object_property = {
+
+                                    "redirect_url": redirect_url,
+                                    "bhk": bhk,
+                                    "location": location_prop,
+                                    "price": price,
+                                    "size": size
+                                };
+
+                                //picture.....................................
+                                if (document.querySelectorAll(".results-wrapper")[0].childNodes[i] && document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[0].childNodes[0].currentSrc) {
+                                    object_property.picture = document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[0].childNodes[0].currentSrc;
+                                }
+                            }
                         }
-
                         property_details.push(object_property);
                     }
+
+
 
                     return property_details;
 
                 })
-                // console.log(page_prop)
+                console.log(page_prop)
 
 
                 var d = new Date();
                 var n2 = d.getSeconds();
                 if ((n2 - n1) < 0) {
-                    console.log((60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from housing.com in " + place);
+                    console.log(page_prop.length + " properties in " + (60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from housing.com in " + place);
                 } else {
-                    console.log(((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from housing.com in " + place);
+                    console.log(page_prop.length + " properties in " + ((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from housing.com in " + place);
                 }
 
 
