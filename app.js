@@ -16,8 +16,8 @@ const puppeteer = require('puppeteer')
 //     await browser.close();
 // })();
 
-let bhk_count = [1, 1, 1, 1, 1, 1]
-// let bhk_count = [0, 0, 1, 0, 0, 0];
+// let bhk_count = [1, 1, 1, 1, 1, 1]
+let bhk_count = [0, 0, 1, 0, 0, 0];
 let place = "tamil nadu";
 
 var d = new Date();
@@ -261,6 +261,95 @@ for (let x = 0; x < bhk_count.length; x++) {
 
                 await browser.close();
             })();
+            (async () => {
+                const browser = await puppeteer.launch({
+                    headless: false,
+                    args: ['--start-maximized']
+                });
+                const page = await browser.newPage();
+                page.setViewport({
+                    width: 0,
+                    height: 0
+                });
+                const search_string1 = "rent housing.com " + (x + 1) + " bhk " + place + " ";
+
+                console.log("-x-x-x-x- start -x-x-x-x-x-x-")
+                await page.goto("https://www.google.com/search?q=" + search_string1);
+                console.log("x-x-x-x-x- next -x-x-x-x-x")
+                await page.evaluate(() => {
+                    document.querySelector('.DKV0Md').click()
+
+                })
+                // full page load wait
+                await page.waitForNavigation();
+
+                var page_prop = await page.evaluate(() => {
+
+                    var numberofblocks = document.querySelectorAll(".results-wrapper")[0].childNodes.length;
+                    var property_details = [];
+                    for (let i = 0; i < numberofblocks; i++) {
+                        if (document.querySelectorAll(".results-wrapper")[0].childNodes[i] && document.querySelectorAll(".results-wrapper")[0].childNodes[i].attributes[0]) {
+                            if (document.querySelectorAll(".results-wrapper")[0].childNodes[i].attributes[0].nodeName == "data-listingid") {
+                                //redirect_url...................................
+
+                                let redirect_url = "https://housing.com/rent/search-" + document.URL.split("-")[document.URL.split("-").length - 1] + "?listingId=" + document.querySelectorAll(".results-wrapper")[0].childNodes[i].attributes[0].value
+
+                                // bhk..................................
+                                let bhk = Number(document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split(" ")[0].split("\n")[1])
+
+                                //location........................   
+
+                                var location_prop = document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split("\n")[2] + " " + document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split("\n")[3];
+
+
+                                //price..............................
+                                let price = Number(document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split("\n")[1].split(",")[0] + document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split("\n")[1].split(",")[1])
+
+                                //size................................
+                                let size = document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split("\n")[4].split("urnished")[1]
+
+
+
+                                var object_property = {
+
+                                    "redirect_url": redirect_url,
+                                    "bhk": bhk,
+                                    "location": location_prop,
+                                    "price": price,
+                                    "size": size
+                                };
+
+                                //picture.....................................
+                                if (document.querySelectorAll(".results-wrapper")[0].childNodes[i] && document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[0].childNodes[0].currentSrc) {
+                                    object_property.picture = document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[0].childNodes[0].currentSrc;
+                                }
+                            }
+                        }
+                        property_details.push(object_property);
+                    }
+
+
+
+                    return property_details;
+
+                })
+                console.log(page_prop)
+
+
+                var d = new Date();
+                var n2 = d.getSeconds();
+                if ((n2 - n1) < 0) {
+                    console.log((60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from housing.com in " + place);
+                } else {
+                    console.log(((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from housing.com in " + place);
+                }
+
+
+                await browser.close();
+            })();
+
+
+
         } else {
             (async () => {
                 const browser = await puppeteer.launch({
@@ -484,6 +573,88 @@ for (let x = 0; x < bhk_count.length; x++) {
 
                 await browser.close();
             })();
+            (async () => {
+                const browser = await puppeteer.launch({
+                    headless: false,
+                    args: ['--start-maximized']
+                });
+                const page = await browser.newPage();
+                page.setViewport({
+                    width: 0,
+                    height: 0
+                });
+                const search_string1 = "rent housing.com " + (x + 1) + " bhk " + place + " ";
+
+                console.log("-x-x-x-x- start -x-x-x-x-x-x-")
+                await page.goto("https://www.google.com/search?q=" + search_string1);
+                console.log("x-x-x-x-x- next -x-x-x-x-x")
+                await page.evaluate(() => {
+                    document.querySelector('.DKV0Md').click()
+
+                })
+                // full page load wait
+                await page.waitForNavigation();
+
+                var page_prop = await page.evaluate(() => {
+
+                    var numberofblocks = document.querySelectorAll(".results-wrapper")[0].childNodes.length;
+                    var property_details = [];
+
+                    for (let i = 0; i < numberofblocks; i++) {
+
+                        //redirect_url...................................
+
+                        let redirect_url = "https://housing.com/rent/search-" + document.URL.split("-")[document.URL.split("-").length - 1] + "?listingId=" + document.querySelectorAll(".results-wrapper")[0].childNodes[i].attributes[0].value
+
+                        // bhk..................................
+                        let bhk = Number(document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split(" ")[0].split("\n")[1])
+
+                        //location........................   
+                        var location_prop = document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split("\n")[2] + " " + document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split("\n")[3];
+
+                        //price..............................
+                        let price = Number(document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split("\n")[1].split(",")[0] + document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split("\n")[1].split(",")[1])
+
+                        //size................................
+                        let size = document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split("\n")[4].split("urnished")[1]
+
+
+
+                        var object_property = {
+
+                            "redirect_url": redirect_url,
+                            "bhk": bhk,
+                            "location": location_prop,
+                            "price": price,
+                            "size": size
+                        };
+
+                        //picture.....................................
+                        if (document.querySelectorAll(".results-wrapper")[0].childNodes[i] && document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[0].childNodes[0].currentSrc) {
+                            object_property.picture = document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[0].childNodes[0].currentSrc;
+                        }
+
+                        property_details.push(object_property);
+                    }
+
+                    return property_details;
+
+                })
+                // console.log(page_prop)
+
+
+                var d = new Date();
+                var n2 = d.getSeconds();
+                if ((n2 - n1) < 0) {
+                    console.log((60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from housing.com in " + place);
+                } else {
+                    console.log(((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from housing.com in " + place);
+                }
+
+
+                await browser.close();
+            })();
+
         }
 
     }
