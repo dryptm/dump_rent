@@ -18,7 +18,7 @@ const puppeteer = require('puppeteer')
 
 // let bhk_count = [1, 1, 1, 1, 1, 1]
 let bhk_count = [0, 0, 1, 0, 0, 0];
-let place = "tamil nadu";
+let place = "lucknow";
 
 var d = new Date();
 var n1 = d.getSeconds();
@@ -30,6 +30,7 @@ for (let x = 0; x < bhk_count.length; x++) {
         let w = place.split(" ");
 
         if (w.length > 1) {
+            // magicbricks---------------------------------------------------
             (async () => {
                 const browser = await puppeteer.launch({
                     headless: false,
@@ -152,6 +153,7 @@ for (let x = 0; x < bhk_count.length; x++) {
 
                 await browser.close();
             })();
+            // 99acers-----------------------------------------------------------------
             (async () => {
                 const browser = await puppeteer.launch({
                     headless: false,
@@ -336,7 +338,7 @@ for (let x = 0; x < bhk_count.length; x++) {
                     return property_details;
 
                 })
-                console.log(page_prop)
+                // console.log(page_prop)
 
 
                 var d = new Date();
@@ -354,6 +356,7 @@ for (let x = 0; x < bhk_count.length; x++) {
 
 
         } else {
+            // magicbrickes--------------------------------------
             (async () => {
                 const browser = await puppeteer.launch({
                     headless: false,
@@ -475,6 +478,7 @@ for (let x = 0; x < bhk_count.length; x++) {
 
                 await browser.close();
             })();
+            // 99acers-----------------------------------------
             (async () => {
                 const browser = await puppeteer.launch({
                     headless: false,
@@ -651,7 +655,7 @@ for (let x = 0; x < bhk_count.length; x++) {
                     return property_details;
 
                 })
-                console.log(page_prop)
+                // console.log(page_prop)
 
 
                 var d = new Date();
