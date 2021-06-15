@@ -145,9 +145,9 @@ for (let x = 0; x < bhk_count.length; x++) {
                 var d = new Date();
                 var n2 = d.getSeconds();
                 if ((n2 - n1) < 0) {
-                    console.log(page_prop.length + " properties in " + (60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
+                    console.log(page_prop.length + " properties -- " + (60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
                 } else {
-                    console.log(page_prop.length + " properties in " + ((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
+                    console.log(page_prop.length + " properties -- " + ((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
                 }
 
                 await browser.close();
@@ -254,9 +254,9 @@ for (let x = 0; x < bhk_count.length; x++) {
                 var d = new Date();
                 var n2 = d.getSeconds();
                 if ((n2 - n1) < 0) {
-                    console.log(page_prop.length + " properties in " + (60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from 99acers in " + place);
+                    console.log(page_prop.length + " properties -- " + (60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from 99acers in " + place);
                 } else {
-                    console.log(page_prop.length + " properties in " + ((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from 99acers in " + place);
+                    console.log(page_prop.length + " properties -- " + ((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from 99acers in " + place);
                 }
 
                 await browser.close();
@@ -342,9 +342,9 @@ for (let x = 0; x < bhk_count.length; x++) {
                 var d = new Date();
                 var n2 = d.getSeconds();
                 if ((n2 - n1) < 0) {
-                    console.log(page_prop.length + " properties in " + (60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from housing.com in " + place);
+                    console.log(page_prop.length + " properties -- " + (60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from housing.com in " + place);
                 } else {
-                    console.log(page_prop.length + " properties in " + ((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from housing.com in " + place);
+                    console.log(page_prop.length + " properties -- " + ((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from housing.com in " + place);
                 }
 
 
@@ -467,9 +467,9 @@ for (let x = 0; x < bhk_count.length; x++) {
                 var d = new Date();
                 var n2 = d.getSeconds();
                 if ((n2 - n1) < 0) {
-                    console.log(page_prop.length + " properties in " + (60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
+                    console.log(page_prop.length + " properties -- " + (60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
                 } else {
-                    console.log(page_prop.length + " properties in " + ((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
+                    console.log(page_prop.length + " properties -- " + ((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from magicbricks in " + place);
                 }
 
 
@@ -568,9 +568,9 @@ for (let x = 0; x < bhk_count.length; x++) {
                 var d = new Date();
                 var n2 = d.getSeconds();
                 if ((n2 - n1) < 0) {
-                    console.log(page_prop.length + " properties in " + (60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from 99acers in " + place);
+                    console.log(page_prop.length + " properties -- " + (60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from 99acers in " + place);
                 } else {
-                    console.log(page_prop.length + " properties in " + ((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from 99acers in " + place);
+                    console.log(page_prop.length + " properties -- " + ((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from 99acers in " + place);
                 }
 
 
@@ -579,7 +579,7 @@ for (let x = 0; x < bhk_count.length; x++) {
             //housing.com----------------------------------------------------------------
             (async () => {
                 const browser = await puppeteer.launch({
-                    headless: false,
+                    headless: true,
                     args: ['--start-maximized']
                 });
                 const page = await browser.newPage();
@@ -657,9 +657,9 @@ for (let x = 0; x < bhk_count.length; x++) {
                 var d = new Date();
                 var n2 = d.getSeconds();
                 if ((n2 - n1) < 0) {
-                    console.log(page_prop.length + " properties in " + (60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from housing.com in " + place);
+                    console.log(page_prop.length + " properties -- " + (60 + (n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from housing.com in " + place);
                 } else {
-                    console.log(page_prop.length + " properties in " + ((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from housing.com in " + place);
+                    console.log(page_prop.length + " properties -- " + ((n2 - n1)) + " seconds taken to load " + (x + 1) + "bhk data from housing.com in " + place);
                 }
 
 
