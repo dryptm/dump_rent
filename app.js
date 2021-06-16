@@ -17,13 +17,16 @@ const puppeteer = require('puppeteer')
 // })();
 
 // let bhk_count = [1, 1, 1, 1, 1, 1]
-let bhk_count = [0, 0, 1, 0, 0, 0];
-let place = "lucknow";
+let bhk_count = [0, 0, 0, 0, 1, 0];
+let place = "tamil nadu";
 
 var d = new Date();
 var n1 = d.getSeconds();
+var all_prop = []
+// if (x == (bhk_count.length) - 1) {
 
-
+//     console.log(all_prop.length)
+// }
 
 for (let x = 0; x < bhk_count.length; x++) {
     if (bhk_count[x] == 1) {
@@ -156,7 +159,7 @@ for (let x = 0; x < bhk_count.length; x++) {
             // 99acers-----------------------------------------------------------------
             (async () => {
                 const browser = await puppeteer.launch({
-                    headless: false,
+                    headless: true,
                     args: ['--start-maximized']
                 });
                 const page = await browser.newPage();
@@ -253,6 +256,7 @@ for (let x = 0; x < bhk_count.length; x++) {
                 // console.log(page_prop)
 
 
+
                 var d = new Date();
                 var n2 = d.getSeconds();
                 if ((n2 - n1) < 0) {
@@ -266,7 +270,7 @@ for (let x = 0; x < bhk_count.length; x++) {
             //housing.com----------------------------------------------------------------
             (async () => {
                 const browser = await puppeteer.launch({
-                    headless: true,
+                    headless: false,
                     args: ['--start-maximized']
                 });
                 const page = await browser.newPage();
@@ -274,7 +278,13 @@ for (let x = 0; x < bhk_count.length; x++) {
                     width: 0,
                     height: 0
                 });
-                const search_string1 = "rent housing.com " + (x + 1) + " bhk " + place + " ";
+                var h;
+                if (x == 3 || x == 4 || x == 5) {
+                    h = 3
+                } else {
+                    h = x
+                }
+                const search_string1 = "rent housing.com " + (h + 1) + " bhk " + place + " ";
 
                 console.log("-x-x-x-x- start -x-x-x-x-x-x-")
                 await page.goto("https://www.google.com/search?q=" + search_string1);
@@ -292,13 +302,13 @@ for (let x = 0; x < bhk_count.length; x++) {
                     var property_details = [];
                     for (let i = 0; i < numberofblocks; i++) {
                         if (document.querySelectorAll(".results-wrapper")[0].childNodes[i] && document.querySelectorAll(".results-wrapper")[0].childNodes[i].attributes[0]) {
-                            if (document.querySelectorAll(".results-wrapper")[0].childNodes[i].attributes[0].nodeName == "data-listingid") {
+                            if (document.querySelectorAll(".results-wrapper")[0].childNodes[i].localName == "article") {
                                 //redirect_url...................................
 
                                 let redirect_url = "https://housing.com/rent/search-" + document.URL.split("-")[document.URL.split("-").length - 1] + "?listingId=" + document.querySelectorAll(".results-wrapper")[0].childNodes[i].attributes[0].value
 
                                 // bhk..................................
-                                let bhk = Number(document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split(" ")[0].split("\n")[1])
+                                let bhk = Number(document.querySelectorAll(".results-wrapper")[0].childNodes[i].firstChild.childNodes[1].childNodes[0].childNodes[2].childNodes[0].innerText.split(" ")[0].split("\n")[0])
 
                                 //location........................   
 
@@ -306,7 +316,13 @@ for (let x = 0; x < bhk_count.length; x++) {
 
 
                                 //price..............................
-                                let price = Number(document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[1].childNodes[0].childNodes[1].innerText.split(",")[0] + document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[1].childNodes[0].childNodes[1].innerText.split(",")[1])
+                                var price = ""
+                                var pr = document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[1].childNodes[0].childNodes[1].innerText
+                                var prsp = pr.split(",")
+                                for (var j = 0; j < prsp.length; j++) {
+                                    price = price + prsp[j]
+                                }
+                                price = Number(price)
 
                                 //size................................
                                 let size = document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[1].childNodes[0].childNodes[4].childNodes[1].innerText
@@ -341,6 +357,7 @@ for (let x = 0; x < bhk_count.length; x++) {
                 // console.log(page_prop)
 
 
+
                 var d = new Date();
                 var n2 = d.getSeconds();
                 if ((n2 - n1) < 0) {
@@ -350,7 +367,7 @@ for (let x = 0; x < bhk_count.length; x++) {
                 }
 
 
-                await browser.close();
+                // await browser.close();
             })();
 
 
@@ -467,6 +484,7 @@ for (let x = 0; x < bhk_count.length; x++) {
                 // console.log(page_prop)
 
 
+
                 var d = new Date();
                 var n2 = d.getSeconds();
                 if ((n2 - n1) < 0) {
@@ -481,7 +499,7 @@ for (let x = 0; x < bhk_count.length; x++) {
             // 99acers-----------------------------------------
             (async () => {
                 const browser = await puppeteer.launch({
-                    headless: false,
+                    headless: true,
                     args: ['--start-maximized']
                 });
                 const page = await browser.newPage();
@@ -569,6 +587,7 @@ for (let x = 0; x < bhk_count.length; x++) {
                 // console.log(page_prop)
 
 
+
                 var d = new Date();
                 var n2 = d.getSeconds();
                 if ((n2 - n1) < 0) {
@@ -583,7 +602,7 @@ for (let x = 0; x < bhk_count.length; x++) {
             //housing.com----------------------------------------------------------------
             (async () => {
                 const browser = await puppeteer.launch({
-                    headless: true,
+                    headless: false,
                     args: ['--start-maximized']
                 });
                 const page = await browser.newPage();
@@ -591,7 +610,13 @@ for (let x = 0; x < bhk_count.length; x++) {
                     width: 0,
                     height: 0
                 });
-                const search_string1 = "rent housing.com " + (x + 1) + " bhk " + place + " ";
+                var h;
+                if (x == 3 || x == 4 || x == 5) {
+                    h = 3
+                } else {
+                    h = x
+                }
+                const search_string1 = "rent housing.com " + (h + 1) + " bhk " + place + " ";
 
                 console.log("-x-x-x-x- start -x-x-x-x-x-x-")
                 await page.goto("https://www.google.com/search?q=" + search_string1);
@@ -609,13 +634,13 @@ for (let x = 0; x < bhk_count.length; x++) {
                     var property_details = [];
                     for (let i = 0; i < numberofblocks; i++) {
                         if (document.querySelectorAll(".results-wrapper")[0].childNodes[i] && document.querySelectorAll(".results-wrapper")[0].childNodes[i].attributes[0]) {
-                            if (document.querySelectorAll(".results-wrapper")[0].childNodes[i].attributes[0].nodeName == "data-listingid") {
+                            if (document.querySelectorAll(".results-wrapper")[0].childNodes[i].localName == "article") {
                                 //redirect_url...................................
 
                                 let redirect_url = "https://housing.com/rent/search-" + document.URL.split("-")[document.URL.split("-").length - 1] + "?listingId=" + document.querySelectorAll(".results-wrapper")[0].childNodes[i].attributes[0].value
 
                                 // bhk..................................
-                                let bhk = Number(document.querySelectorAll(".results-wrapper")[0].childNodes[i].innerText.split(" ")[0].split("\n")[1])
+                                let bhk = Number(document.querySelectorAll(".results-wrapper")[0].childNodes[i].firstChild.childNodes[1].childNodes[0].childNodes[2].childNodes[0].innerText.split(" ")[0].split("\n")[0])
 
                                 //location........................   
 
@@ -623,7 +648,13 @@ for (let x = 0; x < bhk_count.length; x++) {
 
 
                                 //price..............................
-                                let price = Number(document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[1].childNodes[0].childNodes[1].innerText.split(",")[0] + document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[1].childNodes[0].childNodes[1].innerText.split(",")[1])
+                                var price = ""
+                                var pr = document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[1].childNodes[0].childNodes[1].innerText
+                                var prsp = pr.split(",")
+                                for (var j = 0; j < prsp.length; j++) {
+                                    price = price + prsp[j]
+                                }
+                                price = Number(price)
 
                                 //size................................
                                 let size = document.querySelectorAll(".results-wrapper")[0].childNodes[i].childNodes[0].childNodes[1].childNodes[0].childNodes[4].childNodes[1].innerText
@@ -658,6 +689,7 @@ for (let x = 0; x < bhk_count.length; x++) {
                 // console.log(page_prop)
 
 
+
                 var d = new Date();
                 var n2 = d.getSeconds();
                 if ((n2 - n1) < 0) {
@@ -667,10 +699,11 @@ for (let x = 0; x < bhk_count.length; x++) {
                 }
 
 
-                await browser.close();
+                // await browser.close();
             })();
 
         }
 
     }
+
 }
