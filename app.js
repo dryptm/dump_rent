@@ -270,7 +270,7 @@ for (let x = 0; x < bhk_count.length; x++) {
             //housing.com----------------------------------------------------------------
             (async () => {
                 const browser = await puppeteer.launch({
-                    headless: false,
+                    headless: true,
                     args: ['--start-maximized']
                 });
                 const page = await browser.newPage();
@@ -367,7 +367,7 @@ for (let x = 0; x < bhk_count.length; x++) {
                 }
 
 
-                // await browser.close();
+                await browser.close();
             })();
 
 
@@ -602,7 +602,7 @@ for (let x = 0; x < bhk_count.length; x++) {
             //housing.com----------------------------------------------------------------
             (async () => {
                 const browser = await puppeteer.launch({
-                    headless: false,
+                    headless: true,
                     args: ['--start-maximized']
                 });
                 const page = await browser.newPage();
@@ -699,7 +699,7 @@ for (let x = 0; x < bhk_count.length; x++) {
                 }
 
 
-                // await browser.close();
+                await browser.close();
             })();
 
         }
