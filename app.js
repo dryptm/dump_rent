@@ -18,23 +18,24 @@ const puppeteer = require('puppeteer')
 
 // let bhk_count = [1, 1, 1, 1, 1, 1]
 let bhk_count = [0, 0, 0, 0, 1, 0];
-let place = "tamil nadu";
+let place = "lucknow";
 
 var d = new Date();
 var n1 = d.getSeconds();
 var all_prop = []
+var merged = []
 // if (x == (bhk_count.length) - 1) {
 
 //     console.log(all_prop.length)
 // }
-
 for (let x = 0; x < bhk_count.length; x++) {
     if (bhk_count[x] == 1) {
         let w = place.split(" ");
 
         if (w.length > 1) {
+            async function big(){
             // magicbricks---------------------------------------------------
-            (async () => {
+            async function f1() {
                 const browser = await puppeteer.launch({
                     headless: false,
                     args: ['--start-maximized']
@@ -155,11 +156,12 @@ for (let x = 0; x < bhk_count.length; x++) {
                 }
 
                 await browser.close();
-            })();
+                return page_prop
+            }
             // 99acers-----------------------------------------------------------------
-            (async () => {
+            async function f2() {
                 const browser = await puppeteer.launch({
-                    headless: true,
+                    headless: false,
                     args: ['--start-maximized']
                 });
                 const page = await browser.newPage();
@@ -266,11 +268,12 @@ for (let x = 0; x < bhk_count.length; x++) {
                 }
 
                 await browser.close();
-            })();
+                return page_prop
+            }
             //housing.com----------------------------------------------------------------
-            (async () => {
+            async function f3() {
                 const browser = await puppeteer.launch({
-                    headless: true,
+                    headless: false,
                     args: ['--start-maximized']
                 });
                 const page = await browser.newPage();
@@ -368,13 +371,26 @@ for (let x = 0; x < bhk_count.length; x++) {
 
 
                 await browser.close();
-            })();
-
+               return page_prop
+            }
+            let [res1, res2 ,res3] =  await Promise.all([f1(), f2(),f3()]);
+            all_prop.push(res1)
+            all_prop.push(res2)
+            all_prop.push(res3)
+            merged = [].concat.apply([], all_prop);
+              
+            console.log(merged)
+        }
+        big();
+           
 
 
         } else {
             // magicbrickes--------------------------------------
-            (async () => {
+            async function big(){
+
+            
+            async function f1() {
                 const browser = await puppeteer.launch({
                     headless: false,
                     args: ['--start-maximized']
@@ -495,11 +511,12 @@ for (let x = 0; x < bhk_count.length; x++) {
 
 
                 await browser.close();
-            })();
+                return page_prop
+            }
             // 99acers-----------------------------------------
-            (async () => {
+            async function f2() {
                 const browser = await puppeteer.launch({
-                    headless: true,
+                    headless: false,
                     args: ['--start-maximized']
                 });
                 const page = await browser.newPage();
@@ -598,11 +615,12 @@ for (let x = 0; x < bhk_count.length; x++) {
 
 
                 await browser.close();
-            })();
+                return page_prop
+            }
             //housing.com----------------------------------------------------------------
-            (async () => {
+            async function f3() {
                 const browser = await puppeteer.launch({
-                    headless: true,
+                    headless: false,
                     args: ['--start-maximized']
                 });
                 const page = await browser.newPage();
@@ -700,10 +718,32 @@ for (let x = 0; x < bhk_count.length; x++) {
 
 
                 await browser.close();
-            })();
+                return page_prop
+            }
+            let [res1, res2 ,res3] =  await Promise.all([f1(), f2(),f3()]);
+            all_prop.push(res1)
+            all_prop.push(res2)
+            all_prop.push(res3)
+             merged = [].concat.apply([], all_prop);
+              
+            console.log(merged)
+           
+        
+        }
+        big();
 
         }
 
     }
 
 }
+app.get('/',(req,res)=>{
+
+
+  res.send(merged)
+
+})
+
+app.listen(process.env.PORT || 3000,(err)=>{
+console.log("Server is Running")
+})
