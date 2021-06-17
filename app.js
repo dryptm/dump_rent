@@ -122,12 +122,10 @@ for (let x = 0; x < bhk_count.length; x++) {
 
                             } else {
                                 size = "unknown"
-
                             }
 
                             var object_property = {
 
-                                
                                 "redirect_url": redirect_url,
                                 "bhk": bhk,
                                 "location": location_prop,
